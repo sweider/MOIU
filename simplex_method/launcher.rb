@@ -20,9 +20,17 @@ a_matrix = Matrix.rows [
                            [1,1,0,2,0,5,4,12],
                            [1,0,0,2,1,2,1,6]
                        ]
-b_vector = Matrix.column_vector [4,2,5]
-c_vector = Matrix.row_vector [-1,-3,-2,-1,1,4,-3,-10]
-x_basis = [0,2,4,0,5,0,0,0]
+
+a_matrix = Matrix.rows [
+                           [1,1,1,0,-2,2,-6,3,4],
+                           [3,0,1,0,3,4,-8,1,-3],
+                           [0,0,1,1,1,5,-7,-1,2]
+                       ]
+b_vector = Matrix.column_vector  [4,1,2]# [4,2,5]
+# c_vector = Matrix.row_vector [-1,-3,-2,-1,1,4,-3,-10]
+c_vector = Matrix.row_vector Array.new(9){-1}
+x_vector = Matrix.column_vector [0,3,1,1,0,0,0,0,0]
+x_basis = [0,3,1,1,0,0,0,0,0] #[0,2,4,0,5,0,0,0]
 task_data = TaskData.new(a_matrix, b_vector, c_vector, x_basis)
 simplex_method_solver = SimplexMethodSolver.new
 solution = simplex_method_solver.solve task_data
@@ -30,5 +38,5 @@ solution = simplex_method_solver.solve task_data
 if (solution.nil?)
   puts simplex_method_solver.error_msg
 else
-  puts "x = {#{solution.map{|e| e.round(3)}.join(', ')}}"
+  puts "x = {#{solution.map{|e| e.to_f.round(3)}.join(', ')}}"
 end
